@@ -19,7 +19,8 @@
     "files": [
         "package.json",
         "README.md",
-        "dist/"
+        "dist/",
+        "typings"
     ],
     "sideEffects": false,
     "author": {
