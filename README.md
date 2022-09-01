@@ -1,98 +1,37 @@
 # rollup-plugin-total-size
 
-![npm](https://img.shields.io/npm/dw/common-charts.svg)
-[![GitHub stars](https://img.shields.io/github/stars/halo951/common-charts.svg?style=social&label=common-charts)](https://github.com/halo951/common-charts)
-[![npm version](https://badge.fury.io/js/common-charts.svg)](https://badge.fury.io/js/common-charts)
+![npm](https://img.shields.io/npm/dw/rollup-plugin-total-size.svg)
+[![GitHub stars](https://img.shields.io/github/stars/halo951/rollup-plugin-total-size.svg?style=social&label=rollup-plugin-total-size)](https://github.com/halo951/rollup-plugin-total-size)
+[![npm version](https://badge.fury.io/js/rollup-plugin-total-size.svg)](https://badge.fury.io/js/rollup-plugin-total-size)
 
 > 适用于 vue 项目的 echarts 图表集合
 
-## 安装
-
--   install in vue2.7 or vue3.x
+## install
 
 ```bash
 
-yarn add common-charts
+yarn add rollup-plugin-total-size
 
 ```
 
--   install in vue2.6.14
+## usage
 
-> 注: 由于 @vue/composition-api 限制, 仅支持通过 @vue/cli-service 编译. 所以, 当你的项目是 vue2.6.\* 时, **必须使用@vue/cli-service 作为编译器**
+```typescript
+import { RollupOptions } from 'rollup'
+import { totalSize } from 'rollup-plugin-total-size'
 
-```bash
-yarn add common-charts @vue/composition-api
-```
-
-## 快速上手
-
-```vue
-<!-- use in vue3 composition api -->
-<script lang="ts" setup>
-import { Chart, createBar } from 'common-charts'
-import { ref } from 'vue'
-
-const chartOptions = ref(
-    createBar([
-        /* 填充数据 */
-    ])
-)
-</script>
-
-<!-- use in vue2 -->
-<script lang="ts" setup>
-import { Chart, createBar } from 'common-charts'
-import { Component, Vue } from 'vue-property-decorator'
-import type { EchartOption } from 'echarts'
-
-@Component({ components: { Chart } })
-export default class extends Vue {
-    chartOptions: EchartOption = createBar([
-        /* 填充数据 */
-    ])
-}
-</script>
-
-<!-- use in js -->
-<script>
-import { Chart, createBar } from 'common-charts'
-
-export default {
-    components: { Chart },
-    data() {
-        return {
-            chartOptions: createBar([
-                /* 填充数据 */
-            ])
-        }
+/** export rollup.config */
+export default async (): Promise<RollupOptions | Array<RollupOptions>> => {
+    return {
+        plugins: [totalSize()]
     }
 }
-</script>
-
-<!-- 必填项: Chart 组件引入和 指定容器尺寸(主要是高度) -->
-<template>
-    <!-- usage component -->
-    <Chart :options="chartOptions" />
-</template>
-
-<style>
-.chart {
-    height: 181px - 16px;
-}
-</style>
 ```
 
-## chart 特性
+## options
 
--   增强, 针对同一时刻大量更新的 echarts 图表, 增加了队列修改能力
--   增强, 针对单一图表, 增加 `clear` 属性, 允许清除未完成动画, 并执行下次渲染
-
-## 可用图表创建方法
-
--   createBar
--   createLine
--   createPie
--   createProcessLine
--   create
-
-## example
+| key     | description                    |
+| ------- | ------------------------------ |
+| total   | 统计 dist 体积综合             |
+| max     | 当单文件体积超过阈值, 发出提示 |
+| disable | 禁用统计 (比如: --watch)       |
