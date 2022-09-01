@@ -19,7 +19,6 @@
     "files": [
         "package.json",
         "README.md",
-        "tsconfig.json",
         "dist/"
     ],
     "sideEffects": false,
