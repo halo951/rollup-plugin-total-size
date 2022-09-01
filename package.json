@@ -1,6 +1,6 @@
 {
     "name": "rollup-plugin-total-size",
-    "version": "1.0.3",
+    "version": "1.0.4",
     "description": "统计rollup 打包文件的 总计、原始尺寸、gzipped 体积",
     "keywords": [
         "rollup-plugin",
