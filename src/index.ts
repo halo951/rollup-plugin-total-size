@@ -1,7 +1,7 @@
 import chalk from 'chalk'
 import { OutputBundle, Plugin } from 'rollup'
 import { gzipSync } from 'zlib'
-import { compress } from 'brotli-wasm'
+import { compress } from 'brotli'
 import { markdownTable } from './markdown-table'
 import boxen from 'boxen'
 import prettier from 'prettier'
@@ -59,7 +59,8 @@ export const totalSize = (options: Partial<ITotalSizePluginOption> = {}): Plugin
                 }
 
                 const gzipped = gzipSync(code)
-                const compressed = await compress(stringToUint8Array(code))
+
+                const compressed = await compress(Buffer.from(code), {})
 
                 // set to map
                 files[fileName] = {

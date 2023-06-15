@@ -14,7 +14,6 @@ const banner: string = `
  * @author ${pkg.author.name}(${pkg.author.url})
  * @license ${pkg.license}
  */`.trim()
-
 /** export rollup.config */
 export default async (): Promise<RollupOptions | Array<RollupOptions>> => {
     const plugins = [

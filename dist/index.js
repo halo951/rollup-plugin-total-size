@@ -1,10 +1,10 @@
 /** 
- * rollup-plugin-total-size@1.1.0
+ * rollup-plugin-total-size@1.1.1
  * 
  * Copyright (c) 2023 halo951 <https://github.com/halo951>
  * Released under MIT License
  * 
- * @build Thu Jun 15 2023 15:43:59 GMT+0800 (中国标准时间)
+ * @build Thu Jun 15 2023 15:59:43 GMT+0800 (中国标准时间)
  * @author halo951(https://github.com/halo951)
  * @license MIT
  */
@@ -14,7 +14,7 @@ Object.defineProperty(exports, '__esModule', { value: true });
 
 var chalk = require('chalk');
 var zlib = require('zlib');
-var brotliWasm = require('brotli-wasm');
+var brotli = require('brotli');
 var boxen = require('boxen');
 var prettier = require('prettier');
 
@@ -231,13 +231,6 @@ const uint8ArrayToString = (fileData) => {
     }
     return dataString;
 };
-const stringToUint8Array = (str) => {
-    let arr = [];
-    for (let i = 0, j = str.length; i < j; ++i) {
-        arr.push(str.charCodeAt(i));
-    }
-    return new Uint8Array(arr);
-};
 const num2kb = (num) => Number((num / 1024).toFixed(2));
 /** 统计 rollup 打包文件体积 */
 const totalSize = (options = {}) => {
@@ -263,7 +256,7 @@ const totalSize = (options = {}) => {
                         code = bundle.code;
                     }
                     const gzipped = zlib.gzipSync(code);
-                    const compressed = yield brotliWasm.compress(stringToUint8Array(code));
+                    const compressed = yield brotli.compress(Buffer.from(code), {});
                     // set to map
                     files[fileName] = {
                         originSize: code.length,
